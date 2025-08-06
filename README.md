@@ -63,6 +63,7 @@ Content-Type: application/json
 {
   "amount": 1200,
   "email": "user@test.com",
+  "source": "tok_test",
   "currency": "USD"
 }
 ```
@@ -73,17 +74,13 @@ POST /subscriptions
 Content-Type: application/json
 
 {
-  "amount": 1000,
+  "donorId": "abc123",
+  "amount": 1500,
   "currency": "USD",
-  "source": "tok_test",
-  "email": "donor@example.com",
   "interval": "monthly",
-  "campaignDescription": "Emergency relief for flood victims in Assam"
+  "campaignDescription": "Emergency food and clean water for earthquake victims in Nepal"
 }
 ```
-
-## License
-MIT
 
 ---
 
