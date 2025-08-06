@@ -1,29 +1,28 @@
-const express = require('expresss');
+const express = require('express');
 const { subscriptions, transactions } = require('../store');
 const { generateTags, summarizeCompaign } = require('../services/llm');
 
 const router = express.Router();
 
 router.post('/subscriptions', (req, res) => {
-  const { amount, currency, source, email, campaignDescription } = req.body;
+  const { donorId, amount, currency, interval, campaignDescription } = req.body;
 
-  if (!amount || !currency || !source || !email || !campaignDescription) {
+  if (!amount || !currency || !donorId || !interval || !campaignDescription) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  const donorId = `${email}-${Date.now()}`;
   const tags = generateTags(campaignDescription);
   const summary = summarizeCompaign(campaignDescription);
 
   subscriptions[donorId] = {
     donorId,
-    email,
     amount,
     currency,
-    source,
     campaignDescription,
     tags,
     summary,
+    isActive: true,
+    interval,
     createdAt: new Date().toISOString(),
   }
 

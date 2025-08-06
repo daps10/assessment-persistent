@@ -6,9 +6,9 @@ const router = express.Router();
 
 
 router.post("/charge", (req, res) => {
-  const { amount, currency, source, description } = req.body;
+  const { amount, email, currency, source } = req.body;
 
-  if (!amount || !currency || !source || !description) {
+  if (!amount || !email || !currency || !source) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
